@@ -3,13 +3,14 @@ import { defineConfig, devices } from '@playwright/test';
 
 
 export default defineConfig({
+  timeout: 30 * 1000,
   use: {
-    // Run headless in CI, but allow headed mode locally for debugging
-    headless: !!process.env.CI,
+    // Force headless to true for now to debug
+    headless: true,
   },
   reporter: [
-    // Don't open the report automatically in CI; locally only open on failure
-    ['html', { open: process.env.CI ? 'never' : 'on-failure' }]
+    // Force 'never' to ensure it doesn't try to open the report
+    ['html', { open: 'never' }]
   ],
   // Other optional configurations (like baseURL, devices, etc.)
 });
