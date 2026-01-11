@@ -8,8 +8,8 @@ export default defineConfig({
     headless: !!process.env.CI,
   },
   reporter: [
-    // Don't open the report automatically in CI
-    ['html', { open: process.env.CI ? 'never' : 'always' }]
+    // Don't open the report automatically in CI; locally only open on failure
+    ['html', { open: process.env.CI ? 'never' : 'on-failure' }]
   ],
   // Other optional configurations (like baseURL, devices, etc.)
 });
