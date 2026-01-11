@@ -4,10 +4,12 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   use: {
-    headless: false,  // This will launch the browser in non-headless mode (visible)
+    // Run headless in CI, but allow headed mode locally for debugging
+    headless: !!process.env.CI,
   },
   reporter: [
-    ['html', { open: 'always' }] // Include the allure reporter in the config
+    // Don't open the report automatically in CI
+    ['html', { open: process.env.CI ? 'never' : 'always' }]
   ],
   // Other optional configurations (like baseURL, devices, etc.)
 });
